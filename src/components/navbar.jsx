@@ -13,11 +13,18 @@ function Navbar() {
         <li>
           <a>Blog</a>
         </li>
+        <li>
+          <div className='md:hidden flex'>
+            <a className='btn rounded-full bg-warm px-10 border-none'>
+              Get Started
+            </a>
+          </div>
+        </li>
       </>
     );
   }
   return (
-    <div data-theme='light'>
+    <div>
       <div className='navbar bg-base-100'>
         <div className='navbar-start'>
           <div className='dropdown'>
@@ -52,8 +59,10 @@ function Navbar() {
             <Menu />
           </ul>
         </div>
-        <div className='navbar-end'>
-          <a className='btn rounded-full bg-warm px-10 text-xl'>Get Started</a>
+        <div className='navbar-end hidden md:flex'>
+          <a className='btn rounded-full bg-warm px-10 text-xl border-none'>
+            Get Started
+          </a>
         </div>
       </div>
     </div>
