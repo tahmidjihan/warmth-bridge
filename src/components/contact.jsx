@@ -4,7 +4,7 @@ function Contact() {
   return (
     <div className=''>
       <h1 className='text-5xl font-bold text-center py-10'>Contact Us</h1>
-      <div className='w-10/12 mx-auto flex justify-around  flex-col md:flex-row'>
+      <div className='w-10/12 mx-auto flex justify-around  flex-col md:flex-row align-middle'>
         <div className='flex flex-col gap-4 max-w-xs py-10'>
           <label className='input input-bordered flex items-center gap-2'>
             <svg
@@ -47,8 +47,8 @@ function Contact() {
           </button>
         </div>
         <div>
-          <div className='max-w-md flex flex-col gap-2'>
-            <h1 className='text-4xl mb-4 font-extrabold'>Info</h1>
+          <div className='max-w-md flex flex-col gap-2 py-10'>
+            <h1 className='text-4xl mb-4 font-extrabold'>Info:</h1>
             <h2 className='text-2xl font-extrabold'>Location</h2>
             <p>Address: 123 Main Street, City, Country</p>
             <h2 className='text-2xl font-extrabold'>Contact</h2>

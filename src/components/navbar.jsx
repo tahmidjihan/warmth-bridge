@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   function Menu() {
@@ -8,16 +9,18 @@ function Navbar() {
           <a>Home</a>
         </li>
         <li>
-          <a>About</a>
+          <a>Donation Campaigns</a>
         </li>
         <li>
-          <a>Blog</a>
+          <a>How to Help</a>
         </li>
         <li>
           <div className='md:hidden flex'>
-            <a className='btn rounded-full bg-warm px-10 border-none'>
+            <Link
+              to={'/signup'}
+              className='btn rounded-full bg-warm px-10 border-none'>
               Get Started
-            </a>
+            </Link>
           </div>
         </li>
       </>
@@ -60,9 +63,11 @@ function Navbar() {
           </ul>
         </div>
         <div className='navbar-end hidden md:flex'>
-          <a className='btn rounded-full bg-warm px-10 text-xl border-none'>
+          <Link
+            to={'/signup'}
+            className='btn rounded-full bg-warm px-10 border-none'>
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </div>

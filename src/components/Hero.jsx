@@ -1,33 +1,48 @@
 import React from 'react';
-
+import FirstSlide from './carousel-heros/FirstSlide';
+import SecondSlide from './carousel-heros/SecondSlide';
+import ThirdSlide from './carousel-heros/ThirdSlide';
 function Hero() {
   return (
     <>
-      <div
-        className='hero min-h-screen'
-        style={{
-          backgroundImage: 'url(/assets/hero.png)',
-        }}>
-        <div className='hero-content text-center text-white'>
-          <div className='max-w-lg'>
-            <h1 className='mb-5 text-7xl font-extrabold'>
-              Spread warmth with WarmthBridge
-            </h1>
-            <p className='mb-5'>
-              Spread warmth with WarmthBridge. You might have some old cloths or
-              some money to donate. we donate cloths to the that person or
-              families need the cloths. Winter Is almost there. You can donate
-              your old winter warm cloths to the persons that are in need.
-              Spread warmth; remember, charity is never waste of anything.
-            </p>
-            <div className=''>
-              <button className='btn bg-warm rounded-full text-black px-5 border-none md:mx-1'>
-                Get Started
-              </button>
-              <button className='btn border-warm rounded-full bg-transparent text-warm px-5 border-1 md:mx-1'>
-                Learn More
-              </button>
-            </div>
+      <div className='carousel w-full'>
+        <div id='slide1' className='carousel-item relative w-full'>
+          <div className='w-full'>
+            <FirstSlide></FirstSlide>
+          </div>
+          <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'>
+            <a href='#slide3' className='btn btn-circle'>
+              ❮
+            </a>
+            <a href='#slide2' className='btn btn-circle'>
+              ❯
+            </a>
+          </div>
+        </div>
+        <div id='slide2' className='carousel-item relative w-full'>
+          <div className='w-full'>
+            <SecondSlide></SecondSlide>
+          </div>
+          <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'>
+            <a href='#slide1' className='btn btn-circle'>
+              ❮
+            </a>
+            <a href='#slide3' className='btn btn-circle'>
+              ❯
+            </a>
+          </div>
+        </div>
+        <div id='slide3' className='carousel-item relative w-full'>
+          <div className='w-full'>
+            <ThirdSlide></ThirdSlide>
+          </div>
+          <div className='absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between'>
+            <a href='#slide2' className='btn btn-circle'>
+              ❮
+            </a>
+            <a href='#slide1' className='btn btn-circle'>
+              ❯
+            </a>
           </div>
         </div>
       </div>
