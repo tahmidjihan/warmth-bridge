@@ -6,10 +6,10 @@ function Navbar() {
     return (
       <>
         <li>
-          <a>Home</a>
+          <Link to={'/'}>Home</Link>
         </li>
         <li>
-          <a>Donation Campaigns</a>
+          <Link to={'/campaigns'}>Donation Campaigns</Link>
         </li>
         <li>
           <a>How to Help</a>

@@ -4,43 +4,46 @@ import { Link } from 'react-router-dom';
 
 function Login() {
   return (
-    <div class='hero bg-base-200 min-h-screen'>
-      <div class='hero-content flex-col lg:flex-row-reverse'>
-        <div class='card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl'>
-          <form class='card-body'>
-            <div class='form-control'>
-              <label class='label'>
-                <span class='label-text'>Email</span>
+    <div className='hero bg-base-200 min-h-screen'>
+      <div className='hero-content flex-col lg:flex-row-reverse'>
+        <div className='card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl'>
+          <form className='card-body'>
+            <div className='form-control'>
+              <label className='label'>
+                <span className='label-text'>Email</span>
               </label>
               <input
                 type='email'
                 placeholder='email'
-                class='input input-bordered'
+                className='input input-bordered'
                 required
               />
             </div>
-            <div class='form-control'>
-              <label class='label'>
-                <span class='label-text'>Password</span>
+            <div className='form-control'>
+              <label className='label'>
+                <span className='label-text'>Password</span>
               </label>
               <input
                 type='password'
                 placeholder='password'
-                class='input input-bordered'
+                className='input input-bordered'
                 required
               />
-              <label class='label'>
-                <a href='#' class='label-text-alt link link-hover'>
+              <label className='label'>
+                <a href='#' className='label-text-alt link link-hover'>
                   Forgot password?
                 </a>
               </label>
             </div>
-            <div class='form-control mt-6'>
-              <button class='btn bg-warm'>Sign up</button>
+            <div className='form-control mt-6 flex flex-col gap-2'>
+              <button className='btn bg-warm'>Log in</button>
+              <button className='btn bg-warm'>Log in with Google</button>
               <p className='text-center text-sm '>
                 New to WarmthBridge?{' '}
                 <span>
-                  <Link to={'/signup'}>Sign up</Link>
+                  <Link to={'/signup'} className='text-warm hover:underline'>
+                    Sign up
+                  </Link>
                 </span>
               </p>
             </div>
