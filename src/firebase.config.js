@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
+import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,10 +13,12 @@ const firebaseConfig = {
   projectId: 'warmth-bridge',
   storageBucket: 'warmth-bridge.firebasestorage.app',
   messagingSenderId: '834699841494',
-  appId: '1:834699841494:web:d164b70993a20caf49de77',
-  measurementId: 'G-EK684W2ZWW',
+  appId: '1:834699841494:web:22d87228630b26e649de77',
+  measurementId: 'G-QFT0H5K4PK',
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app);
+export default auth;

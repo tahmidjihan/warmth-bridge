@@ -1,25 +1,53 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
+import auth from './firebase.config';
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 
 export const authContext = createContext();
-
 function AuthProvider({ children }) {
-  const [campaigns, setCampaigns] = React.useState([]);
-  function campaignsData() {
-    fetch(
-      'https://gist.githubusercontent.com/tahmidjihan/9a2b08b4b416a605c88fcfe24462f5c3/raw/13bad95f1d35bc29abccbb5f94c568f06e69d9a2/warm-bridge'
-    )
-      .then((res) => res.json())
-      .then((data) => setCampaigns(data));
-    return campaigns;
+  //Create a User
+  const [user, setUser] = React.useState(null);
+  function createUser(email, password, name, photo) {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (result) => {
+        setUser(result.user);
+      }
+    );
   }
-  // const value = {
-  //   campaigns,
-  // };
+  //Login
+  function loginUser(email, password) {
+    signInWithEmailAndPassword(auth, email, password).then((result) => {
+      setUser(result.user);
+    });
+  }
+  //sign in with google
+  function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      setUser(result.user);
+    });
+  }
+  console.log(user === null ? 'null' : user);
+  const value = {
+    createUser,
+    loginUser,
+    signInWithGoogle,
+    user,
+  };
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unSubscribe();
+  }, []);
   return (
     <>
-      <authContext.Provider value={authContext}>
-        {children}
-      </authContext.Provider>
+      <authContext.Provider value={value}>{children}</authContext.Provider>
     </>
   );
 }
