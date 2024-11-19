@@ -6,6 +6,9 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateEmail,
+  updateProfile,
+  signOut,
 } from 'firebase/auth';
 
 export const authContext = createContext();
@@ -13,11 +16,10 @@ function AuthProvider({ children }) {
   //Create a User
   const [user, setUser] = React.useState(null);
   function createUser(email, password, name, photo) {
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (result) => {
-        setUser(result.user);
-      }
-    );
+    createUserWithEmailAndPassword(auth, email, password).then((result) => {
+      setUser(result.user);
+    });
+    updateUser(name, photo);
   }
   //Login
   function loginUser(email, password) {
@@ -32,12 +34,32 @@ function AuthProvider({ children }) {
       setUser(result.user);
     });
   }
-  console.log(user === null ? 'null' : user);
+  // update profile
+  function updateUser(name, photo, email) {
+    name &&
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+    photo &&
+      updateProfile(auth.currentUser, {
+        photoURL: photo,
+      });
+    email && updateEmail(auth.currentUser, email);
+  }
+  //logout
+  function logout() {
+    signOut(auth).then(() => {
+      setUser(null);
+    });
+  }
+
   const value = {
     createUser,
     loginUser,
     signInWithGoogle,
     user,
+    updateUser,
+    logout,
   };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {

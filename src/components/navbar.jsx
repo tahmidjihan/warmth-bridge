@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { authContext } from '../authProvider';
 
 function Navbar() {
+  const { user } = useContext(authContext);
+
+  function Action() {
+    return (
+      <>
+        {user ? (
+          <>
+            <Link
+              to={'/dashboard'}
+              className='btn rounded-full bg-warm px-10 border-none'>
+              Dashboard
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              to={'/signup'}
+              className='btn rounded-full bg-warm px-10 border-none'>
+              Get Started
+            </Link>
+          </>
+        )}
+      </>
+    );
+  }
   function Menu() {
     return (
       <>
@@ -16,11 +42,7 @@ function Navbar() {
         </li>
         <li>
           <div className='md:hidden flex'>
-            <Link
-              to={'/signup'}
-              className='btn rounded-full bg-warm px-10 border-none'>
-              Get Started
-            </Link>
+            <Action></Action>
           </div>
         </li>
       </>
@@ -63,11 +85,7 @@ function Navbar() {
           </ul>
         </div>
         <div className='navbar-end hidden md:flex'>
-          <Link
-            to={'/signup'}
-            className='btn rounded-full bg-warm px-10 border-none'>
-            Get Started
-          </Link>
+          <Action></Action>
         </div>
       </div>
     </div>

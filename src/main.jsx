@@ -9,6 +9,8 @@ import Login from './pages/Login.jsx';
 import AuthProvider from './authProvider.jsx';
 import Campaigns from './pages/campaigns.jsx';
 import Campaign from './pages/campaign.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import UpdateProfile from './pages/updateProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: '/campaigns/:id',
         element: <Campaign></Campaign>,
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: '/dashboard/updateProfile',
+        element: <UpdateProfile></UpdateProfile>,
       },
     ],
   },

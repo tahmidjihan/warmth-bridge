@@ -1,8 +1,11 @@
-import { parse } from 'dotenv';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { authContext } from '../authProvider';
 import { useParams } from 'react-router-dom';
 
 function Campaign() {
+  const { user } = useContext(authContext);
+  const navigate = useNavigate();
   const [campaigns, setCampaigns] = React.useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -20,7 +23,14 @@ function Campaign() {
     }
     campaignsData();
   }, []);
-
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+  if (!user) {
+    return null;
+  }
   const { contactInfo, description, division, image, title } = campaigns;
   return (
     <>

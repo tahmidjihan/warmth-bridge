@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../authProvider';
-import { Link } from 'react-router-dom';
 
 function Campaigns() {
+  const { user } = useContext(authContext);
+  const navigate = useNavigate();
   const [campaigns, setCampaigns] = React.useState([]);
   useEffect(() => {
     function campaignsData() {
@@ -14,7 +16,14 @@ function Campaigns() {
     }
     campaignsData();
   }, []);
-
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+  if (!user) {
+    return null;
+  }
   return (
     <>
       <div className='container mx-auto py-10'>
