@@ -1,21 +1,38 @@
 import React, { useRef } from 'react';
 import Signup from './Signup';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaRegEye } from 'react-icons/fa6';
 import { FaRegEyeSlash } from 'react-icons/fa6';
 import { authContext } from './../authProvider';
 
 function Login() {
+  const [loginCompleted, setLoginCompleted] = React.useState(false);
   const [email, setEmail] = React.useState('');
-  const { loginUser, signInWithGoogle } = React.useContext(authContext);
+  const { loginUser, signInWithGoogle, user } = React.useContext(authContext);
   const [seePassword, setSeePassword] = React.useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { from } = location.state || { from: '/' };
+
   function HandleSubmit(e) {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password);
+    setLoginCompleted(true);
   }
 
+  React.useEffect(() => {
+    if (user && !loginCompleted) {
+      setLoginCompleted(true);
+    } else if (loginCompleted) {
+      navigate(from);
+    }
+  }, [user, loginCompleted, navigate, from]);
+
+  if (user || loginCompleted) {
+    return null;
+  }
   return (
     <div className='hero bg-base-200 min-h-screen'>
       <div className='hero-content flex-col lg:flex-row-reverse'>
@@ -63,7 +80,12 @@ function Login() {
             </div>
             <div className='form-control mt-6 flex flex-col gap-2'>
               <button className='btn bg-warm'>Log in</button>
-              <span className='btn bg-warm' onClick={signInWithGoogle}>
+              <span
+                className='btn bg-warm'
+                onClick={() => {
+                  signInWithGoogle();
+                  setLoginCompleted(true);
+                }}>
                 Log in with Google
               </span>
               <p className='text-center text-sm '>

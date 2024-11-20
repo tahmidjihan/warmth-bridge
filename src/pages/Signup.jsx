@@ -1,12 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaRegEye } from 'react-icons/fa6';
 import { FaRegEyeSlash } from 'react-icons/fa6';
 import { authContext } from './../authProvider';
 
 function Signup() {
-  const { createUser, signInWithGoogle } = React.useContext(authContext);
+  const { createUser, signInWithGoogle, user } = React.useContext(authContext);
   const [seePassword, setSeePassword] = React.useState(false);
+  const navigate = useNavigate();
   function HandleSubmit(e) {
     e.preventDefault();
     const email = e.target.email.value;
@@ -14,6 +15,12 @@ function Signup() {
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     createUser(email, password, name, photo);
+  }
+  if (user) {
+    navigate('/');
+  }
+  if (user) {
+    return null;
   }
   return (
     <div className='hero bg-base-200 min-h-screen'>
@@ -73,7 +80,11 @@ function Signup() {
             </div>
             <div className='form-control mt-6 flex flex-col gap-2'>
               <button className='btn bg-warm'>Sign up</button>
-              <span className='btn bg-warm' onClick={signInWithGoogle}>
+              <span
+                className='btn bg-warm'
+                onClick={() => {
+                  signInWithGoogle();
+                }}>
                 Sign up with Google
               </span>
 

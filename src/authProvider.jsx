@@ -10,7 +10,7 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const authContext = createContext();
 
@@ -22,6 +22,7 @@ function AuthProvider({ children }) {
     setUser(res.user);
 
     await updateUser(name, photo);
+    return res;
   }
   //Login
   function loginUser(email, password) {
@@ -35,6 +36,7 @@ function AuthProvider({ children }) {
     signInWithPopup(auth, provider).then((result) => {
       setUser(result.user);
     });
+    return provider;
   }
   // update profile
   async function updateUser(name, photo, email) {
@@ -50,7 +52,6 @@ function AuthProvider({ children }) {
   //forgot password
   function forgotPassword(email) {
     sendPasswordResetEmail(auth, email);
-    console.log(email);
   }
   //logout
   function logout() {
@@ -58,7 +59,17 @@ function AuthProvider({ children }) {
       setUser(null);
     });
   }
-
+  //toasts
+  const info = (msg) => toast.success(msg);
+  const success = (msg) => toast.success(msg);
+  const error = (msg) => toast.success(msg);
+  const warning = (msg) => toast.success(msg);
+  const toasts = {
+    info,
+    success,
+    error,
+    warning,
+  };
   const value = {
     createUser,
     loginUser,
@@ -67,6 +78,7 @@ function AuthProvider({ children }) {
     updateUser,
     logout,
     forgotPassword,
+    toasts,
   };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -76,7 +88,10 @@ function AuthProvider({ children }) {
   }, []);
   return (
     <>
-      <authContext.Provider value={value}>{children}</authContext.Provider>
+      <authContext.Provider value={value}>
+        {children}
+        <ToastContainer />
+      </authContext.Provider>
     </>
   );
 }

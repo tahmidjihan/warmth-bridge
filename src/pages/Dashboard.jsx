@@ -5,10 +5,9 @@ import { authContext } from '../authProvider';
 function Dashboard() {
   const { user, logout } = useContext(authContext);
   const navigate = useNavigate();
-  console.log(user);
   useEffect(() => {
     if (!user) {
-      navigate('/login');
+      navigate('/login', { state: { from: '/dashboard' } });
     }
   }, [user, navigate]);
   if (!user) {

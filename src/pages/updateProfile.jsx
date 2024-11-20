@@ -14,13 +14,12 @@ function UpdateProfile() {
   };
   useEffect(() => {
     if (!user) {
-      navigate('/login');
+      navigate('/login', { state: { from: '/dashboard/updateProfile' } });
     }
   }, [user, navigate]);
   if (!user) {
     return null;
   }
-  console.log(user);
   return (
     <>
       <div>

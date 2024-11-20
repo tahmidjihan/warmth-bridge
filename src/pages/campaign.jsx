@@ -25,13 +25,13 @@ function Campaign() {
   }, []);
   useEffect(() => {
     if (!user) {
-      navigate('/login');
+      navigate('/login', { state: { from: '/campaign' } });
     }
   }, [user, navigate]);
   if (!user) {
     return null;
   }
-  const { contactInfo, description, division, image, title } = campaigns;
+  const { contactInfo, description, division, title } = campaigns;
   return (
     <>
       <h1 className='text-5xl font-bold text-center py-10'>Donate Now!</h1>
