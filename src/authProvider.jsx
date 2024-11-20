@@ -6,20 +6,22 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateEmail,
   updateProfile,
   signOut,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const authContext = createContext();
+
 function AuthProvider({ children }) {
   //Create a User
   const [user, setUser] = React.useState(null);
-  function createUser(email, password, name, photo) {
-    createUserWithEmailAndPassword(auth, email, password).then((result) => {
-      setUser(result.user);
-    });
-    updateUser(name, photo);
+  async function createUser(email, password, name, photo) {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    setUser(res.user);
+
+    await updateUser(name, photo);
   }
   //Login
   function loginUser(email, password) {
@@ -35,16 +37,20 @@ function AuthProvider({ children }) {
     });
   }
   // update profile
-  function updateUser(name, photo, email) {
-    name &&
+  async function updateUser(name, photo, email) {
+    (await name) &&
       updateProfile(auth.currentUser, {
         displayName: name,
       });
-    photo &&
+    (await photo) &&
       updateProfile(auth.currentUser, {
         photoURL: photo,
       });
-    email && updateEmail(auth.currentUser, email);
+  }
+  //forgot password
+  function forgotPassword(email) {
+    sendPasswordResetEmail(auth, email);
+    console.log(email);
   }
   //logout
   function logout() {
@@ -60,6 +66,7 @@ function AuthProvider({ children }) {
     user,
     updateUser,
     logout,
+    forgotPassword,
   };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaRegEye } from 'react-icons/fa6';
+import { FaRegEyeSlash } from 'react-icons/fa6';
 import { authContext } from './../authProvider';
 
 function Signup() {
   const { createUser, signInWithGoogle } = React.useContext(authContext);
+  const [seePassword, setSeePassword] = React.useState(false);
   function HandleSubmit(e) {
     e.preventDefault();
     const email = e.target.email.value;
@@ -53,18 +56,20 @@ function Signup() {
               <label className='label'>
                 <span className='label-text'>Password</span>
               </label>
-              <input
-                type='password'
-                placeholder='password'
-                name='password'
-                className='input input-bordered'
-                required
-              />
-              <label className='label'>
-                <a href='#' className='label-text-alt link link-hover'>
-                  Forgot password?
-                </a>
-              </label>
+              <div className='relative'>
+                <input
+                  type={seePassword ? 'text' : 'password'}
+                  placeholder='password'
+                  className='input input-bordered'
+                  name='password'
+                  required
+                />
+                <span
+                  className='text-2xl absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer'
+                  onClick={() => setSeePassword(!seePassword)}>
+                  {!seePassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </span>
+              </div>
             </div>
             <div className='form-control mt-6 flex flex-col gap-2'>
               <button className='btn bg-warm'>Sign up</button>

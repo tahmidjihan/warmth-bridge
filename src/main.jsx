@@ -11,6 +11,7 @@ import Campaigns from './pages/campaigns.jsx';
 import Campaign from './pages/campaign.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import UpdateProfile from './pages/updateProfile.jsx';
+import ForgotPassword from './pages/forgotPassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>,
+      },
+      {
+        path: '/login/forgot-password',
+        element: <ForgotPassword></ForgotPassword>,
       },
       {
         path: '/campaigns',

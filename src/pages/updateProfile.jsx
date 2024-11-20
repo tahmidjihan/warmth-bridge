@@ -10,7 +10,7 @@ function UpdateProfile() {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const photo = e.target.photo.value;
-    updateUser(name, photo, email);
+    updateUser(name, photo);
   };
   useEffect(() => {
     if (!user) {
@@ -39,19 +39,14 @@ function UpdateProfile() {
                   type='text'
                   placeholder='Name'
                   name='name'
-                  class='input input-bordered w-full max-w-xs'
+                  className='input input-bordered w-full max-w-xs'
                 />
-                <input
-                  type='email'
-                  placeholder='Email'
-                  name='email'
-                  class='input input-bordered w-full max-w-xs'
-                />
+
                 <input
                   type='url'
                   placeholder='Photo Url'
                   name='photo'
-                  class='input input-bordered w-full max-w-xs'
+                  className='input input-bordered w-full max-w-xs'
                 />
                 <button className='btn bg-white rounded-full px-16'>
                   Save

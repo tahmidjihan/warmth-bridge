@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Signup from './Signup';
 import { Link } from 'react-router-dom';
+import { FaRegEye } from 'react-icons/fa6';
+import { FaRegEyeSlash } from 'react-icons/fa6';
 import { authContext } from './../authProvider';
 
 function Login() {
+  const [email, setEmail] = React.useState('');
   const { loginUser, signInWithGoogle } = React.useContext(authContext);
+  const [seePassword, setSeePassword] = React.useState(false);
   function HandleSubmit(e) {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password);
   }
+
   return (
     <div className='hero bg-base-200 min-h-screen'>
       <div className='hero-content flex-col lg:flex-row-reverse'>
@@ -25,6 +30,7 @@ function Login() {
                 placeholder='email'
                 className='input input-bordered'
                 name='email'
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -32,17 +38,27 @@ function Login() {
               <label className='label'>
                 <span className='label-text'>Password</span>
               </label>
-              <input
-                type='password'
-                placeholder='password'
-                className='input input-bordered'
-                name='password'
-                required
-              />
+              <div className='relative'>
+                <input
+                  type={seePassword ? 'text' : 'password'}
+                  placeholder='password'
+                  className='input input-bordered'
+                  name='password'
+                  required
+                />
+                <span
+                  className='text-2xl absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer'
+                  onClick={() => setSeePassword(!seePassword)}>
+                  {!seePassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </span>
+              </div>
               <label className='label'>
-                <a href='#' className='label-text-alt link link-hover'>
+                <Link
+                  to={'/login/forgot-password'}
+                  state={{ email }}
+                  className='label-text-alt link link-hover'>
                   Forgot password?
-                </a>
+                </Link>
               </label>
             </div>
             <div className='form-control mt-6 flex flex-col gap-2'>
@@ -53,7 +69,10 @@ function Login() {
               <p className='text-center text-sm '>
                 New to WarmthBridge?{' '}
                 <span>
-                  <Link to={'/signup'} className='text-warm hover:underline'>
+                  <Link
+                    to={'/signup'}
+                    state={{ email }}
+                    className='text-warm hover:underline'>
                     Sign up
                   </Link>
                 </span>
