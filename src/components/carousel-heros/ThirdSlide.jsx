@@ -12,7 +12,7 @@ function FirstSlide() {
         <div className='hero-overlay bg-opacity-50 bg-black'></div>
         <div className='hero-content text-center text-white'>
           <div className='max-w-lg'>
-            <h1 className='mb-5 text-7xl font-extrabold'>
+            <h1 className='mb-5 md:text-7xl text-5xl font-extrabold'>
               Give some cloths to those in need. <br /> - Sylhet
             </h1>
             <p className='mb-5'>

@@ -4,7 +4,7 @@ import { authContext } from '../authProvider';
 import { useParams } from 'react-router-dom';
 
 function Campaign() {
-  const { user } = useContext(authContext);
+  const { user, toasts } = useContext(authContext);
   const navigate = useNavigate();
   const [campaigns, setCampaigns] = React.useState([]);
   const { id } = useParams();
@@ -23,6 +23,10 @@ function Campaign() {
     }
     campaignsData();
   }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toasts.success('Thank you ! We will reach your destination soon');
+  };
   useEffect(() => {
     if (!user) {
       navigate('/login', { state: { from: '/campaign' } });
@@ -31,24 +35,29 @@ function Campaign() {
   if (!user) {
     return null;
   }
+
   const { contactInfo, description, division, title } = campaigns;
   return (
     <>
       <h1 className='text-5xl font-bold text-center py-10'>Donate Now!</h1>
 
       <div className='container mx-auto py-10 flex justify-around flex-col-reverse md:flex-row'>
-        <form className='max-w-md mx-auto md:mx-0 p-4 bg-gray-100 rounded-3xl shadow-md'>
+        <form
+          className='max-w-md mx-auto md:mx-0 p-4 bg-gray-100 rounded-3xl shadow-md'
+          onSubmit={handleSubmit}>
           <input
             type='text'
             name='name'
             placeholder='Name'
             className='w-full mb-4 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-warm '
+            required
           />
           <div className='md:flex items-center gap-4 mb-4'>
             <input
               type='text'
               name='product'
               placeholder='Product e.g. blanket, jacket, sweater'
+              required
               className='md:flex-grow p-3 w-full border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-warm '
             />
 
@@ -65,11 +74,13 @@ function Campaign() {
             name='location'
             placeholder='Pickup location e.g. 12 no house, 3rd street, Andarkilla, CTG'
             className='w-full mb-4 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-warm '
+            required
           />
           <textarea
             name='notes'
             placeholder='Additional notes (optional)'
             className='w-full mb-4 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-warm '
+            required
           />
           <button
             type='submit'
@@ -78,10 +89,12 @@ function Campaign() {
           </button>
         </form>
         <div>
-          <div className='max-w-md flex flex-col gap-2 mx-auto md:mx-0'>
+          <div className='max-w-[300px] mb-10 flex flex-col gap-2 mx-auto md:mx-0'>
             <h1 className='text-4xl mb-4 font-extrabold'>Info:</h1>
             <h1 className='text-3xl font-extrabold'>{title}</h1>
-            <span className='font-bold text-lg'>{division}</span>
+            <span className='font-bold text-lg'>
+              {division} <span className='text-sm font-normal'>(division)</span>
+            </span>
             <p>{description}</p>
             <p>
               <span className='font-bold'> Contact:</span> {contactInfo}

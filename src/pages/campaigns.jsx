@@ -1,8 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../authProvider';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Campaigns() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  }, []);
   const { user } = useContext(authContext);
   const navigate = useNavigate();
   const [campaigns, setCampaigns] = React.useState([]);
@@ -27,7 +36,9 @@ function Campaigns() {
   return (
     <>
       <div className='container mx-auto py-10'>
-        <div className='section-header text-center py-10  mx-auto'>
+        <div
+          className='section-header text-center py-10  mx-auto'
+          data-aos='fade-down'>
           <h1 className='text-5xl font-bold text-center'>Donation Campaigns</h1>
           <p className='text-center max-w-md mx-auto'>
             Our mission is to provide winter clothing to those in need across
@@ -39,7 +50,8 @@ function Campaigns() {
           {campaigns.map((campaign) => (
             <div
               className='card bg-warm image-full shadow-xl'
-              key={campaign.id}>
+              key={campaign.id}
+              data-aos='fade-up'>
               <figure className='h-48 overflow-hidden'>
                 <img
                   className='w-full h-full object-cover'

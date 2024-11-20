@@ -9,9 +9,9 @@ function FirstSlide() {
           backgroundImage: 'url(/assets/hero.png)',
         }}>
         <div className='hero-content text-center text-white'>
-          <div className='max-w-lg'>
-            <h1 className='mb-5 text-7xl font-extrabold'>
-              Spread warmth with WarmthBridge <br /> - Dhaka
+          <div className='md:max-w-lg max-w-[300px]'>
+            <h1 className='mb-5 text-5xl md:text-7xl font-extrabold'>
+              Spread warmth with Warmth Bridge <br /> - Dhaka
             </h1>
             <p className='mb-5'>
               Spread warmth with WarmthBridge. You might have some old cloths or

@@ -11,65 +11,79 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 export const authContext = createContext();
 
 function AuthProvider({ children }) {
-  //Create a User
   const [user, setUser] = React.useState(null);
+
   async function createUser(email, password, name, photo) {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     setUser(res.user);
-
     await updateUser(name, photo);
+    toast.success('User created successfully!');
     return res;
   }
-  //Login
+
   function loginUser(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((result) => {
-      setUser(result.user);
-    });
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        setUser(result.user);
+        toast.success('Logged in successfully!');
+      })
+      .catch((err) =>
+        toast.error('something went wrong. Check your Information')
+      );
   }
-  //sign in with google
+
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then((result) => {
-      setUser(result.user);
-    });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setUser(result.user);
+        toast.success('Google Sign-In successful!');
+      })
+      .catch((err) =>
+        toast.error('something went wrong. Check your Information')
+      );
     return provider;
   }
-  // update profile
-  async function updateUser(name, photo, email) {
-    (await name) &&
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-    (await photo) &&
-      updateProfile(auth.currentUser, {
-        photoURL: photo,
-      });
+
+  async function updateUser(name, photo) {
+    if (name) {
+      await updateProfile(auth.currentUser, { displayName: name });
+    }
+    if (photo) {
+      await updateProfile(auth.currentUser, { photoURL: photo });
+    }
+    toast.info('Profile updated!');
   }
-  //forgot password
+
   function forgotPassword(email) {
-    sendPasswordResetEmail(auth, email);
+    sendPasswordResetEmail(auth, email)
+      .then(() => toast.info('Password reset email sent!'))
+      .catch((err) =>
+        toast.error('something went wrong. Check your Information')
+      );
   }
-  //logout
+
   function logout() {
-    signOut(auth).then(() => {
-      setUser(null);
-    });
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+        toast.success('Logged out successfully!');
+      })
+      .catch((err) =>
+        toast.error('something went wrong. Check your Information')
+      );
   }
-  //toasts
-  const info = (msg) => toast.success(msg);
+
   const success = (msg) => toast.success(msg);
-  const error = (msg) => toast.success(msg);
-  const warning = (msg) => toast.success(msg);
-  const toasts = {
-    info,
-    success,
-    error,
-    warning,
-  };
+  const error = (msg) => toast.error(msg);
+  const warning = (msg) => toast.warning(msg);
+
+  const toasts = { success, error, warning };
+
   const value = {
     createUser,
     loginUser,
@@ -80,18 +94,18 @@ function AuthProvider({ children }) {
     forgotPassword,
     toasts,
   };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
     return () => unSubscribe();
   }, []);
+
   return (
     <>
-      <authContext.Provider value={value}>
-        {children}
-        <ToastContainer />
-      </authContext.Provider>
+      <authContext.Provider value={value}>{children}</authContext.Provider>
+      <ToastContainer limit={1} />
     </>
   );
 }

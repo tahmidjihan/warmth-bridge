@@ -12,8 +12,9 @@ function FirstSlide() {
         <div className='hero-overlay bg-opacity-50 bg-black'></div>
         <div className='hero-content text-center text-white'>
           <div className='max-w-lg'>
-            <h1 className='mb-5 text-7xl font-extrabold'>
-              Reduce their struggle on this winter. <br /> - Chittagong
+            <h1 className='mb-5 md:text-7xl text-5xl font-extrabold'>
+              Reduce their struggle on this winter. <br />
+              <span className='text-3xl'>-Chittagong</span>
             </h1>
             <p className='mb-5'>
               Spread warmth with WarmthBridge. You might have some old cloths or

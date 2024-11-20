@@ -2,10 +2,20 @@ import React from 'react';
 import FirstSlide from './carousel-heros/FirstSlide';
 import SecondSlide from './carousel-heros/SecondSlide';
 import ThirdSlide from './carousel-heros/ThirdSlide';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 function Hero() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  }, []);
   return (
     <>
-      <div className='carousel w-full'>
+      <div className='carousel w-full' data-aos='fade-up'>
         <div id='slide1' className='carousel-item relative w-full'>
           <div className='w-full'>
             <FirstSlide></FirstSlide>
