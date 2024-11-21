@@ -20,9 +20,11 @@ function NotFound() {
                   Sorry about that! Please visit our hompage to get where you
                   need to go.
                 </p>
-                <button className='sm:w-full lg:w-auto my-2 border rounded md py-4 px-8 text-center bg-warm text-white hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50'>
-                  Take me there!
-                </button>
+                <Link to={'/'}>
+                  <button className='sm:w-full lg:w-auto my-2 border rounded md py-4 px-8 text-center bg-warm text-white hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50'>
+                    Take me there!
+                  </button>
+                </Link>
               </div>
             </div>
             <div>

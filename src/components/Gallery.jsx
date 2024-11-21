@@ -1,9 +1,18 @@
 import React from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Gallery() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  }, []);
   return (
     <>
-      <section id='gallery' className='py-20'>
+      <section id='gallery' className='py-20' data-aos='fade-up'>
         <h1 className='text-5xl font-bold text-center my-10 flex flex-col max-w-md mx-auto'>
           Real Stories, <br /> Real Impact
           <span className='text-sm font-normal'>
