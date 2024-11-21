@@ -80,7 +80,6 @@ function Campaign() {
             name='notes'
             placeholder='Additional notes (optional)'
             className='w-full mb-4 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-warm '
-            required
           />
           <button
             type='submit'

@@ -38,7 +38,7 @@ function Navbar() {
           <Link to={'/campaigns'}>Donation Campaigns</Link>
         </li>
         <li>
-          <a>How to Help</a>
+          <Link to={'/how-can-i-help'}>How to Help</Link>
         </li>
         <li>
           <div className='md:hidden flex'>
@@ -74,7 +74,7 @@ function Navbar() {
               <Menu />
             </ul>
           </div>
-          <a className='btn btn-ghost text-xl flex gap-2'>
+          <a className='btn btn-ghost text-lg md:text-xl flex gap-1 md:gap-2'>
             <span className='w-[30px] h-[30px] rounded-full bg-warm'></span>
             <span className='text-black font-bold'>WarmthBridge</span>
           </a>
@@ -84,8 +84,17 @@ function Navbar() {
             <Menu />
           </ul>
         </div>
-        <div className='navbar-end hidden md:flex'>
-          <Action></Action>
+        <div className='navbar-end flex gap-2'>
+          <div className='hidden md:flex'>
+            <Action></Action>
+          </div>
+          <span className='rounded-full border-warm border-2 overflow-hidden'>
+            <img
+              src={user?.photoURL}
+              alt=''
+              className='w-10 md:w-12 h-10 md:h-12 rounded-full'
+            />
+          </span>
         </div>
       </div>
     </div>

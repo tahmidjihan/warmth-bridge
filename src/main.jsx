@@ -12,6 +12,7 @@ import Campaign from './pages/campaign.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import UpdateProfile from './pages/updateProfile.jsx';
 import ForgotPassword from './pages/forgotPassword.jsx';
+import HowCanYouHelp from './pages/howCanYouHelp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard/updateProfile',
         element: <UpdateProfile></UpdateProfile>,
+      },
+      {
+        path: '/how-can-i-help',
+        element: <HowCanYouHelp></HowCanYouHelp>,
       },
     ],
   },
