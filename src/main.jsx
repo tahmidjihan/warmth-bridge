@@ -13,11 +13,13 @@ import Dashboard from './pages/Dashboard.jsx';
 import UpdateProfile from './pages/updateProfile.jsx';
 import ForgotPassword from './pages/forgotPassword.jsx';
 import HowCanYouHelp from './pages/howCanYouHelp.jsx';
+import NotFound from './NotFound.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App></App>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',

@@ -88,13 +88,15 @@ function Navbar() {
           <div className='hidden md:flex'>
             <Action></Action>
           </div>
-          <span className='rounded-full border-warm border-2 overflow-hidden'>
-            <img
-              src={user?.photoURL}
-              alt=''
-              className='w-10 md:w-12 h-10 md:h-12 rounded-full'
-            />
-          </span>
+          {user ? (
+            <span className='rounded-full border-warm border-2 overflow-hidden'>
+              <img
+                src={user?.photoURL}
+                alt=''
+                className='w-10 md:w-12 h-10 md:h-12 rounded-full'
+              />
+            </span>
+          ) : null}
         </div>
       </div>
     </div>

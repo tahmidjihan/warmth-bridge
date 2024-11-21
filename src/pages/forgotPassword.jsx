@@ -43,11 +43,10 @@ function ForgotPassword() {
                     onChange={(e) => setInputValue(e.target.value)}
                   />
                 </p>
-                <a to={'/dashboard/updateProfile'}>
-                  <button className='btn bg-white rounded-full px-16'>
-                    Reset
-                  </button>
-                </a>
+
+                <button className='btn bg-white rounded-full px-16'>
+                  Reset
+                </button>
               </form>
             </div>
           </div>
