@@ -1,19 +1,16 @@
 
 
 # 🌿 Warmth Bridge  
-
-![Warmth Bridge Screenshot](https://via.placeholder.com/800x400?text=Project+Screenshot)  
+## Screenshot
+<div align="middle">
+  <img src="./warmth.jpg"/>
+</div>
 
 ## 📌 Overview  
 
 **Warmth Bridge** is a donation platform that connects donors with communities in need. Users can donate unused clothing and choose specific campaigns or locations for their contributions. The platform ensures smooth coordination for collection and distribution, helping reach individuals in rural areas.  
 
 🔗 **[Live Project](https://warmth-bridge.web.app/)** 
-
-## Screenshot
-<div align="middle">
-  <img src="./warmth.jpg"/>
-</div>
 
 ## 🚀 Technologies Used  
 
